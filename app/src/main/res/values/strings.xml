@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Timekeep</string>
+    <string name="a11y_summary">Shows the pause or block screen for apps you chose</string>
+    <string name="a11y_description">Timekeep uses this only to notice which app is on screen, so it can show a pause or block screen for the apps you picked. It cannot read what is on your screen, and nothing leaves your phone.</string>
+</resources>

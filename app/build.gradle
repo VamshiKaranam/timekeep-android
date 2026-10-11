@@ -1,0 +1,48 @@
+plugins {
+    id 'com.android.application'
+}
+
+android {
+    namespace 'io.github.vamshikaranam.timekeep'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'io.github.vamshikaranam.timekeep'
+        minSdk 26
+        targetSdk 34
+        // Each GitHub build gets a higher number, so new APKs install over old ones.
+        versionCode((System.getenv('GITHUB_RUN_NUMBER') ?: '1') as int)
+        versionName '1.0.' + (System.getenv('GITHUB_RUN_NUMBER') ?: '0')
+    }
+
+    // A fixed signing key kept in the repo, so every build is signed the same way
+    // and updates install without uninstalling first. Fine for a personal app.
+    signingConfigs {
+        personal {
+            storeFile rootProject.file('keystore/timekeep.jks')
+            storePassword 'timekeep'
+            keyAlias 'timekeep'
+            keyPassword 'timekeep'
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            signingConfig signingConfigs.personal
+        }
+        debug {
+            signingConfig signingConfigs.personal
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+
+    lint {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+}
